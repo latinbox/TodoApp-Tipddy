@@ -1,13 +1,16 @@
-import React, {Component, createContext} from 'react';
+import React, { Component } from 'react';
+import {createContext} from "react";
 
 export const TodoContext = createContext();
 
 class TodoContextProvider extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
-            todos: [{task: 'do something'}],
-        }
+            todos: [
+                {name: 'do something'},
+            ],
+        };
     }
 
     //create
@@ -30,6 +33,7 @@ class TodoContextProvider extends Component {
         return (
                 <TodoContext.Provider value={{
                     ...this.state,
+
                 }}>
                     {this.props.children}
                 </TodoContext.Provider>
