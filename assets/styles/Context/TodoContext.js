@@ -9,6 +9,7 @@ class TodoContextProvider extends Component {
         super(props);
         this.state = {
             todos: [],
+            message: {},
         };
         this.readTodo();
     }
@@ -19,14 +20,21 @@ class TodoContextProvider extends Component {
         axios.post('/api/todo/create', todo)
             .then(response => {
                 console.log(response.data);
-                const data = [...this.state.todos];
-                data.push(response.data.todo);
-                this.setState({
-                    todos: data,
-                });
+                if(response.data.message.level === 'success'){
+                    const data = [...this.state.todos];
+                    data.push(response.data.todo);
+                    this.setState({
+                        todos: data,
+                        message: response.data.message,
+                    });
+                } else {
+                    this.setState({
+                        message: response.data.message,
+                    });
+                }
             }).catch(error => {
                 console.log(error);
-        })
+        });
     }
     //read
     readTodo(){
@@ -83,6 +91,7 @@ class TodoContextProvider extends Component {
                     updateTodo: this.updateTodo.bind(this),
                     deleteTodo: this.deleteTodo.bind(this),
                     readTodo: this.readTodo.bind(this),
+                    setMessage: (message) => this.setState({message: message}),
                 }}>
                     {this.props.children}
                 </TodoContext.Provider>

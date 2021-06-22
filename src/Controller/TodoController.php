@@ -52,12 +52,16 @@ class TodoController extends AbstractController
         try {
             $this->entityManager->persist($todo);
             $this->entityManager->flush();
-            return $this->json([
-                'todo' => $todo->toArray(),
-            ]);
         } catch (Exception $exception){
-        //error
+            return $this->json([
+                'message' => ['text' => ['Could not submit to the database'], 'level' => 'error']
+            ]);
+
         }
+        return $this->json([
+            'todo' => $todo->toArray(),
+            'message' => ['text' => ['todo has been created', 'Task: ' . $content->name], 'level' => 'success']
+        ]);
     }
     /**
      * @Route("/update/{id}", name="api_todo_update", methods={"PUT"})
