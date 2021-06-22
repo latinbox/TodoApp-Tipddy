@@ -13,6 +13,8 @@ import Paper from '@material-ui/core/Paper';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import AddIcon from '@material-ui/icons/Add';
+import DoneIcon from '@material-ui/icons/Done';
+import CloseIcon from '@material-ui/icons/Close';
 import * as rows from "core-js";
 import {Icon, IconButton, TextField} from "@material-ui/core";
 const useStyles = makeStyles({
@@ -25,7 +27,10 @@ export default function TodoTable() {
     const classes = useStyles();
     const context = useContext(TodoContext);
     const [addTodo, setAddTodo] = useState( '');
+    const [editIsShown, setEditIsShown] = useState(false);
+    const [editTodo, setEditTodo] = useState('');
     return (
+        <>
         <Container>
         <TableContainer component={Paper}>
             <form onSubmit={(event) => {
@@ -52,10 +57,38 @@ export default function TodoTable() {
                     {context.todos.slice().reverse().map((todo, index) => (
                         <TableRow key={'todo' + index}>
                             <TableCell component="th" scope="row">
-                                {todo.name}
+                                {editIsShown === todo.id ?
+                                    <TextField fullWidth={true}
+                                               value={editTodo}
+                                               onChange={(event) =>{
+                                        setEditTodo(event.target.value)
+                                    }}
+                                    InputProps={{
+                                        endAdornment: <>
+                                            <IconButton onClick={()=>{
+                                                setEditIsShown(false);
+                                            }}>
+                                                <CloseIcon/>
+                                            </IconButton>
+                                            <IconButton onClick={()=>{
+                                                context.updateTodo({id: todo.id, name: editTodo});
+                                                setEditIsShown(false);
+                                            }}>
+                                                <DoneIcon/>
+                                            </IconButton>
+                                        </>,
+                                    }}
+                                    />
+                                    :
+                                    todo.name
+
+                                }
+
                             </TableCell>
                             <TableCell align="right">
-                                <IconButton><EditIcon /></IconButton>
+                                <IconButton onClick={()=> {setEditIsShown(todo.id); setEditTodo(todo.name)}}>
+                                    <EditIcon />
+                                </IconButton>
                                 <IconButton> <DeleteIcon /></IconButton>
                             </TableCell>
 
@@ -66,6 +99,8 @@ export default function TodoTable() {
             </form>
         </TableContainer>
         </Container>
+</>
+
     )
 
 

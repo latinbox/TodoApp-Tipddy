@@ -8,7 +8,9 @@ class TodoContextProvider extends Component {
         super(props);
         this.state = {
             todos: [
-                {name: 'do something'},
+                {id: 1, name: 'do something'},
+                {id: 2, name: 'do something'},
+                {id: 3, name: 'do something'},
             ],
         };
     }
@@ -28,8 +30,16 @@ class TodoContextProvider extends Component {
 
     }
     //update
-    updateTodo(){
+    updateTodo(data){
+        const todos = [ ...this.state.todos];
+        const todo = todos.find(todo => {
+            return todo.id === data.id;
+        })
+        todo.name = data.name;
 
+        this.setState({
+            todos: todos,
+        })
     }
     //delete
     deleteTodo(){
@@ -40,6 +50,7 @@ class TodoContextProvider extends Component {
                 <TodoContext.Provider value={{
                     ...this.state,
                     createTodo: this.createTodo.bind(this),
+                    updateTodo: this.updateTodo.bind(this),
                 }}>
                     {this.props.children}
                 </TodoContext.Provider>
