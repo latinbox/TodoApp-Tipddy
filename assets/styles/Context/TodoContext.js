@@ -42,8 +42,15 @@ class TodoContextProvider extends Component {
         })
     }
     //delete
-    deleteTodo(){
-
+    deleteTodo(data){
+        const todos = [...this.state.todos];
+        const todo = todos.find(todo=> {
+            return todo.id === data.id;
+        });
+        todos.splice(todos.indexOf(todo), 1);
+        this.setState({
+            todos: todos,
+        });
     }
     render() {
         return (
@@ -51,6 +58,7 @@ class TodoContextProvider extends Component {
                     ...this.state,
                     createTodo: this.createTodo.bind(this),
                     updateTodo: this.updateTodo.bind(this),
+                    deleteTodo: this.deleteTodo.bind(this),
                 }}>
                     {this.props.children}
                 </TodoContext.Provider>

@@ -17,18 +17,21 @@ import DoneIcon from '@material-ui/icons/Done';
 import CloseIcon from '@material-ui/icons/Close';
 import * as rows from "core-js";
 import {Icon, IconButton, TextField} from "@material-ui/core";
+import DeleteDialog from "./DeleteDialog";
 const useStyles = makeStyles({
     table: {
         minWidth: 650,
     },
 });
 
-export default function TodoTable() {
+function TodoTable() {
     const classes = useStyles();
     const context = useContext(TodoContext);
     const [addTodo, setAddTodo] = useState( '');
     const [editIsShown, setEditIsShown] = useState(false);
     const [editTodo, setEditTodo] = useState('');
+    const [deleteConfirmIsShown, setDeleteConfirmIsShown] = useState(false);
+    const [todoToBeDeleted, setTodoToBeDeleted] = useState(null);
     return (
         <>
         <Container>
@@ -89,7 +92,7 @@ export default function TodoTable() {
                                 <IconButton onClick={()=> {setEditIsShown(todo.id); setEditTodo(todo.name)}}>
                                     <EditIcon />
                                 </IconButton>
-                                <IconButton> <DeleteIcon /></IconButton>
+                                <IconButton onClick={()=>{setDeleteConfirmIsShown(true); setTodoToBeDeleted(todo)}}> <DeleteIcon /></IconButton>
                             </TableCell>
 
                         </TableRow>
@@ -99,10 +102,18 @@ export default function TodoTable() {
             </form>
         </TableContainer>
         </Container>
+            {deleteConfirmIsShown && (
+                <DeleteDialog
+                    todo={todoToBeDeleted}
+                    open={deleteConfirmIsShown}
+                    setDeleteConfirmIsShown={setDeleteConfirmIsShown}
+                />
+            )}
+
 </>
 
-    )
-
-
+    );
 }
+export default TodoTable;
+
 
