@@ -16,48 +16,65 @@ class TodoContextProvider extends Component {
     //create
     createTodo(event, todo){
         event.preventDefault();
-        const data = [...this.state.todos];
-        data.push(todo);
-        this.setState({
-           todos: data,
-        });
-
-    }
-    //read
-    readTodo(){
-        axios.get('/api/todo/read')
-            .then(response=> {
-                // console.log(response.data);
+        axios.post('/api/todo/create', todo)
+            .then(response => {
+                console.log(response.data);
+                const data = [...this.state.todos];
+                data.push(response.data.todo);
                 this.setState({
-                    todos: response.data,
+                    todos: data,
                 });
             }).catch(error => {
                 console.log(error);
         })
     }
+    //read
+    readTodo(){
+        axios.get('/api/todo/read')
+            .then(response=> {
+                 console.log(response.data);
+                this.setState({
+                    todos: response.data,
+                });
+            }).catch(error => {
+                console.log(error);
+        });
+    }
     //update
     updateTodo(data){
-        const todos = [ ...this.state.todos];
-        const todo = todos.find(todo => {
-            return todo.id === data.id;
-        })
-        todo.name = data.name;
+        axios.put('/api/todo/update/' + data.id, data)
+            .then(response =>{
+                const todos = [ ...this.state.todos];
+                const todo = todos.find(todo => {
+                    return todo.id === data.id;
+                });
+                todo.name = data.name;
 
-        this.setState({
-            todos: todos,
+                this.setState({
+                    todos: todos,
+                });
+            }).catch(error =>{
+                console.log(error);
         })
     }
     //delete
-    deleteTodo(data){
-        const todos = [...this.state.todos];
-        const todo = todos.find(todo=> {
-            return todo.id === data.id;
-        });
-        todos.splice(todos.indexOf(todo), 1);
-        this.setState({
-            todos: todos,
+    deleteTodo(data) {
+        axios.delete('/api/todo/delete/' + data.id)
+            .then(response => {
+                //message
+                const todos = [...this.state.todos];
+                const todo = todos.find(todo => {
+                    return todo.id === data.id;
+                });
+                todos.splice(todos.indexOf(todo), 1);
+                this.setState({
+                    todos: todos,
+                });
+            }).catch(error => {
+                console.log(error);
         });
     }
+
     render() {
         return (
                 <TodoContext.Provider value={{
