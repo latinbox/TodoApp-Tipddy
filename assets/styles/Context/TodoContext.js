@@ -14,7 +14,13 @@ class TodoContextProvider extends Component {
     }
 
     //create
-    createTodo(){
+    createTodo(event, todo){
+        event.preventDefault();
+        const data = [...this.state.todos];
+        data.push(todo);
+        this.setState({
+           todos: data,
+        });
 
     }
     //read
@@ -33,7 +39,7 @@ class TodoContextProvider extends Component {
         return (
                 <TodoContext.Provider value={{
                     ...this.state,
-
+                    createTodo: this.createTodo.bind(this),
                 }}>
                     {this.props.children}
                 </TodoContext.Provider>
