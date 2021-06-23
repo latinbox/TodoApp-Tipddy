@@ -19,7 +19,11 @@ import Container from '@material-ui/core/Container';
 
 const useStyles = makeStyles(theme => ({
     thead: {
-        backgroundColor: 'red'
+         backgroundColor: theme.palette.primary.main,
+        //padding: theme.spacing(2),
+    },
+    btn_edit: {
+        color: "green"
     }
 }));
 function TodoTable() {
@@ -51,7 +55,7 @@ function TodoTable() {
         <Fragment>
             <Table>
                 {/*HEAD*/}
-                <TableHead  className={classes.thead}>
+                <TableHead className={classes.thead}>
                     <TableRow>
                         <TableCell>Task</TableCell>
                         <TableCell>Description</TableCell>
@@ -137,7 +141,7 @@ function TodoTable() {
                                     </Fragment>
                                     :
                                     <Fragment>
-                                        <IconButton onClick={() => {
+                                        <IconButton className={classes.btn_edit} onClick={() => {
                                             setEditIsShown(todo.id);
                                             setEditTodoName(todo.name);
                                             setEditTodoDescription(todo.description);
@@ -145,7 +149,7 @@ function TodoTable() {
                                             <EditIcon/>
                                         </IconButton>
 
-                                        <IconButton onClick={() => {
+                                        <IconButton color="secondary" onClick={() => {
                                             setDeleteConfirmationIsShown(true);
                                             setTodoToBeDeleted(todo);
                                         }}>
