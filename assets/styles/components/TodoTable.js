@@ -1,4 +1,4 @@
-import {Typography} from '@material-ui/core';
+import {makeStyles, Typography} from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -17,7 +17,11 @@ import DeleteDialog from './DeleteDialog';
 import Container from '@material-ui/core/Container';
 
 
-
+const useStyles = makeStyles(theme => ({
+    thead: {
+        backgroundColor: 'red'
+    }
+}));
 function TodoTable() {
     const context = useContext(TodoContext);
     const [addTodoName, setAddTodoName] = useState('');
@@ -27,6 +31,7 @@ function TodoTable() {
     const [editTodoDescription, setEditTodoDescription] = useState('');
     const [deleteConfirmationIsShown, setDeleteConfirmationIsShown] = useState(false);
     const [todoToBeDeleted, setTodoToBeDeleted] = useState(null);
+    const classes = useStyles();
 
     const onCreateSubmit = (event) => {
         event.preventDefault();
@@ -44,10 +49,9 @@ function TodoTable() {
     return (
         <Container>
         <Fragment>
-
             <Table>
                 {/*HEAD*/}
-                <TableHead>
+                <TableHead  className={classes.thead}>
                     <TableRow>
                         <TableCell>Task</TableCell>
                         <TableCell>Description</TableCell>
