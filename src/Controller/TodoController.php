@@ -3,7 +3,6 @@
 namespace App\Controller;
 use App\Entity\Todo;
 use App\Repository\TodoRepository;
-use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -49,6 +48,7 @@ class TodoController extends AbstractController
         $content = json_decode($request->getContent());
         $todo = new Todo();
         $todo->setName($content->name);
+        $todo->setDescription($content->description);
         try {
             $this->entityManager->persist($todo);
             $this->entityManager->flush();
@@ -72,18 +72,27 @@ class TodoController extends AbstractController
     public function update(Request $request, Todo $todo): JsonResponse
     {
         $content = json_decode($request->getContent());
+        if ($todo->getName() === $content->name && $todo->getDescription() === $content->description) {
+            return $this->json([
+                'message' => ['text' => 'There was no change to the To-Do. Neither the name or the description was changed.', 'level' => 'error']
+            ]);
+        }
         $todo->setName($content->name);
+        $todo->setDescription($content->description);
+
         try {
             $this->entityManager->flush();
+        } catch (Exception $exception) {
             return $this->json([
-                'todo' => $todo->toArray(),
+                'message' => ['text' => 'Could not reach database when attempting to update a To-Do.', 'level' => 'error']
             ]);
-         } catch (Exception $exception){
-        //error
         }
+
         return $this->json([
-           'message' => 'todo UPDATED'
+            'todo'    => $todo->toArray(),
+            'message' => ['text' => 'To-Do successfully updated!', 'level' => 'success']
         ]);
+
     }
 
     /**
