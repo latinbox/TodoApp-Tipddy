@@ -23,7 +23,7 @@ use Symfony\Component\Security\Http\EntryPoint\AuthenticationEntryPointInterface
  *
  * @author Ryan Weaver <ryan@symfonycasts.com>
  */
-abstract class AbstractLoginFormAuthenticator extends AbstractAuthenticator implements AuthenticationEntryPointInterface, InteractiveAuthenticatorInterface
+abstract class AbstractLoginFormAuthenticator extends AbstractGuardAuthenticator
 {
     /**
      * Return the URL to the login page.
