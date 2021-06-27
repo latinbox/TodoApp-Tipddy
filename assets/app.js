@@ -15,3 +15,5 @@ ReactDOM.render(
         <App/>
     </DefaultThemeProvider>
     , document.getElementById('root'));
+
+export default App;

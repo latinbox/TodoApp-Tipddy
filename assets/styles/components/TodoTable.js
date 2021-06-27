@@ -51,7 +51,6 @@ function TodoTable() {
     };
 
     return (
-        <Container>
         <Fragment>
             <Table>
                 {/*HEAD*/}
@@ -174,7 +173,6 @@ function TodoTable() {
 
 
         </Fragment>
-        </Container>
     );
 }
 
