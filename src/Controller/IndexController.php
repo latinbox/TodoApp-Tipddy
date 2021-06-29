@@ -13,6 +13,8 @@ class IndexController extends AbstractController
      */
     public function index(): Response
     {
+        // acceso solo para admin
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'User tried to access a page without having ROLE_ADMIN');
         return $this->render('index/index.html.twig', [
             'controller_name' => 'IndexController',
         ]);

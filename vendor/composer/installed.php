@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => 'dab9a66fa0c513b1565d8d6aea1dca79363abca3',
+    'reference' => 'f60b760fcb08f32b0b4bff9698e6fefe77cbb480',
     'name' => '__root__',
   ),
   'versions' => 
@@ -18,7 +18,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => 'dab9a66fa0c513b1565d8d6aea1dca79363abca3',
+      'reference' => 'f60b760fcb08f32b0b4bff9698e6fefe77cbb480',
     ),
     'composer/package-versions-deprecated' => 
     array (
@@ -915,6 +915,15 @@
       ),
       'reference' => '92a24a5fd1087511d29a5c7dd98d97c9e2208e75',
     ),
+    'symfony/lock' => 
+    array (
+      'pretty_version' => 'v5.3.2',
+      'version' => '5.3.2.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '1f166823d4307eecd9f964804afefa2a59b9a3cf',
+    ),
     'symfony/mailer' => 
     array (
       'pretty_version' => 'v5.3.0',
@@ -1124,6 +1133,15 @@
       array (
       ),
       'reference' => '4e4997e77f30b4caed2b3cebefdecd7031e25a00',
+    ),
+    'symfony/rate-limiter' => 
+    array (
+      'pretty_version' => 'v5.3.0',
+      'version' => '5.3.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'e9226c91163495ff0b655cdae0fff682e869640b',
     ),
     'symfony/routing' => 
     array (
