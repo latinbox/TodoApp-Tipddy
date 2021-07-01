@@ -1,5 +1,6 @@
 {
   "build/app.js": "/build/app.js",
   "build/runtime.js": "/build/runtime.js",
-  "build/vendors-node_modules_material-ui_core_esm_AppBar_AppBar_js-node_modules_material-ui_core_esm_-d46a67.js": "/build/vendors-node_modules_material-ui_core_esm_AppBar_AppBar_js-node_modules_material-ui_core_esm_-d46a67.js"
+  "build/vendors-node_modules_material-ui_core_esm_AppBar_AppBar_js-node_modules_material-ui_core_esm_-d46a67.js": "/build/vendors-node_modules_material-ui_core_esm_AppBar_AppBar_js-node_modules_material-ui_core_esm_-d46a67.js",
+  "build/vendors-node_modules_material-ui_core_esm_Button_Button_js-node_modules_material-ui_core_esm_-448ac5.js": "/build/vendors-node_modules_material-ui_core_esm_Button_Button_js-node_modules_material-ui_core_esm_-448ac5.js"
 }

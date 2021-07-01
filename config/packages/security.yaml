@@ -16,6 +16,7 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: true
+
         main:
             guard:
                 authenticators:

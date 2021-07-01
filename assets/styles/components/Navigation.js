@@ -47,7 +47,7 @@ const Navigation = () => {
                     <IconButton onClick={toggleDrawer} className={classes.menuIcon} edge="start"><MenuIcon/></IconButton>
                     <Link href="/" variant="h6" color="textPrimary" underline="none">Tipddy-TodoApp</Link>
                     <Box flexGrow={1}/>
-                    <Button size="large">Login</Button>
+                    <Button href="/logout" size="large">Logout</Button>
                 </Toolbar>
                 <Drawer variant="temporary" onClose={toggleDrawer} open={drawerOpen}>
                     <List className={classes.list} >
